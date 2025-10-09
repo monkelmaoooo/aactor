@@ -599,8 +599,10 @@ body.car-theme {
     height: 25px;
     font-size: 12px;
   }
-
-
+  
+  .controls {
+  display: none;
+}
   .top-controls {
     bottom: calc(50% - 200px - 60px);
     left: 50%;
@@ -772,4 +774,5 @@ body.car-theme {
   30% {
     clip: rect(65px, 9999px, 45px, 0);
   }
+
 }
