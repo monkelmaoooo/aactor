@@ -6,10 +6,28 @@
 <title>Monke</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
+  /* Fondo con nieve animada */
+  .container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    background-image: url('assets/snow1.png'), url('assets/snow2.png'), url('assets/snow3.png');
+    animation: snow 20s linear infinite;
+    z-index: -1; /* Esto hace que quede detrás del texto */
+  }
+
+  @keyframes snow {
+    0% { background-position: 0px 0px, 0px 0px, 0px 0px; }
+    100% { background-position: 500px 1000px, 400px 400px, 300px 300px; }
+  }
+
+  /* Estilos del contenido */
   body {
     margin: 0;
     height: 100vh;
-    background-color: #000;
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -17,6 +35,8 @@
     align-items: center;
     font-family: "Inter", sans-serif;
     text-align: center;
+    background-color: black;
+    overflow: hidden;
   }
 
   h1 {
@@ -50,11 +70,9 @@
 </style>
 </head>
 <body>
+  <div class="container"></div> <!-- Fondo animado -->
   <h1>Monke!</h1>
-  <p>  </p>
   <p>C++ Developer</p>
-  <a href="https://discord.gg/rJagq6d3" target="_blank">Server</a>
+  <a href="https://discord.gg/yourserver" target="_blank">Server</a>
 </body>
 </html>
-
-
