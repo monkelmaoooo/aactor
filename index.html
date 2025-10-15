@@ -1,122 +1,96 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>AActor — simple</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monke Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" rel="stylesheet">
 <style>
-  /* Minimal centered style inspired by the target site */
-  :root{
-    --bg: #000;
-    --fg: #eaeaea;
-    --muted: #9a9a9a;
-    --accent: #ff6b9e;
-  }
-  html,body{
-    height:100%;
-    margin:0;
-    background:var(--bg);
-    color:var(--fg);
-    font-family: "Courier New", monospace;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
+  /* Reset */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Retro Gaming', monospace;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
   }
 
-  /* Center pane */
-  .wrap{
-    min-height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  /* Big centered Monke text */
+  #main-title {
+    font-size: 8vw;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #00CED1;
+    text-shadow: 
+      0 0 10px #00CED1, 
+      0 0 20px #FF6B9E, 
+      0 0 30px #00CED1, 
+      0 0 40px #FF6B9E,
+      0 0 50px #00CED1,
+      0 0 60px #FF6B9E;
+    animation: flicker 2s infinite alternate;
   }
 
-  .box{
-    text-align:center;
-    padding:48px 24px;
+  /* Glitch effect */
+  #main-title::before,
+  #main-title::after {
+    content: "Monke";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    overflow: hidden;
+    clip: rect(0, 9999px, 0, 0);
   }
 
-  h1{
-    font-size: clamp(36px, 10vw, 96px);
-    margin:0 0 12px;
-    letter-spacing:2px;
-    font-weight:700;
-    line-height:1;
-    color:var(--fg);
+  #main-title::before { animation: glitchTop 3s infinite linear alternate-reverse; color: #FF6B9E; }
+  #main-title::after { animation: glitchBottom 2.5s infinite linear alternate-reverse; color: #00CED1; }
+
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 22%, 24%, 55% { opacity: 0.4; }
   }
 
-  .sub{
-    color:var(--muted);
-    font-size:14px;
-    margin-bottom:18px;
-    opacity:0.9;
+  @keyframes glitchTop {
+    0% { clip: rect(2px, 9999px, 10px, 0); transform: translate(-50%, -1px); }
+    25% { clip: rect(10px, 9999px, 20px, 0); transform: translate(-50%, 1px); }
+    50% { clip: rect(0px, 9999px, 15px, 0); transform: translate(-50%, -1px); }
+    75% { clip: rect(5px, 9999px, 25px, 0); transform: translate(-50%, 1px); }
+    100% { clip: rect(2px, 9999px, 10px, 0); transform: translate(-50%, 0); }
   }
 
-  .small{
-    display:block;
-    font-size:12px;
-    color:var(--muted);
-    margin-bottom:18px;
+  @keyframes glitchBottom {
+    0% { clip: rect(15px, 9999px, 25px, 0); transform: translate(-50%, 1px); }
+    25% { clip: rect(20px, 9999px, 30px, 0); transform: translate(-50%, -1px); }
+    50% { clip: rect(18px, 9999px, 28px, 0); transform: translate(-50%, 1px); }
+    75% { clip: rect(22px, 9999px, 32px, 0); transform: translate(-50%, -1px); }
+    100% { clip: rect(15px, 9999px, 25px, 0); transform: translate(-50%, 0); }
   }
 
-  /* tiny link row */
-  .links{
-    display:inline-flex;
-    gap:10px;
-    align-items:center;
-    justify-content:center;
-    margin-top:8px;
-  }
-  .links a{
-    color:var(--fg);
-    text-decoration:none;
-    font-size:14px;
-    border:1px solid rgba(255,255,255,0.06);
-    padding:6px 10px;
-    border-radius:8px;
-    opacity:0.95;
-  }
-  .links a:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  /* Optional: animated background dots */
+  body::after {
+    content: "";
+    position: absolute;
+    top:0; left:0; width:100%; height:100%;
+    background: radial-gradient(#00CED1 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: moveDots 10s linear infinite;
+    z-index:-1;
   }
 
-  /* optional tiny avatar row (keeps your assets) */
-  .meta{
-    margin-top:22px;
-    display:flex;
-    gap:12px;
-    align-items:center;
-    justify-content:center;
-    opacity:0.9;
-  }
-  .meta img{ width:36px; height:36px; border-radius:50%; object-fit:cover; border:1px solid rgba(255,255,255,0.06) }
-
-  /* responsive spacing for small screens */
-  @media (max-width:480px){
-    .box{ padding:28px 14px; }
-    h1{ font-size: clamp(28px, 14vw, 56px); }
+  @keyframes moveDots {
+    from { background-position: 0 0; }
+    to { background-position: 100px 100px; }
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="box">
-      <h1>click here ♥</h1>
-      <div class="sub">Monke!</div>
-      <div class="small">c++ developer</div>
-
-      <div class="links" aria-label="links">
-        <!-- tweak URLs/text to your needs -->
-        <a href="https://discord.gg/rJagq6d3" target="_blank" rel="noopener">Vixen</a>
-      </div>
-
-      <div class="meta" aria-hidden="true">
-        <!-- optional: keep your pfp and a couple of badges -->
-        <img src="assets/pfp.png" alt="pfp" onerror="this.style.display='none'">
-        <img src="assets/cpp.png" alt="cpp" onerror="this.style.display='none'">
-      </div>
-    </div>
-  </div>
+  <h1 id="main-title">Monke</h1>
 </body>
 </html>
-
