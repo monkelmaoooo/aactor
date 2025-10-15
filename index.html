@@ -16,7 +16,7 @@
     background-color: black;
     background-image: url('assets/snow1.png'), url('assets/snow2.png'), url('assets/snow3.png');
     animation: snow 20s linear infinite;
-    z-index: -1; /* Esto hace que quede detrás del texto */
+    z-index: -1;
   }
 
   @keyframes snow {
@@ -53,19 +53,23 @@
     margin: 8px 0 24px 0;
   }
 
+  /* Botón con icono */
   a {
-    font-size: 14px;
-    text-decoration: none;
-    color: #fff;
-    border: 1px solid #333;
-    padding: 8px 18px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    display: inline-block;
+    transition: transform 0.2s ease, opacity 0.2s ease;
   }
 
-  a:hover {
-    background-color: #fff;
-    color: #000;
+  a img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* icono blanco sobre fondo oscuro */
+    transition: transform 0.2s ease;
+  }
+
+  a:hover img {
+    transform: scale(1.1);
+    opacity: 0.8;
   }
 </style>
 </head>
@@ -73,7 +77,8 @@
   <div class="container"></div> <!-- Fondo animado -->
   <h1>Monke!</h1>
   <p>C++ Developer</p>
-  <a href="https://discord.gg/rJagq6d3" target="_blank">Server</a>
+  <a href="https://discord.gg/rJagq6d3" target="_blank">
+    <img src="assets/discord.png" alt="Discord Server">
+  </a>
 </body>
 </html>
-
