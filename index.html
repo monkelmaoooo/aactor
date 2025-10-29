@@ -24,6 +24,19 @@
     100% { background-position: 500px 1000px, 400px 400px, 300px 300px; }
   }
 
+  .pumpkin-inline {
+  width: 48px;
+  height: auto;
+  vertical-align: middle;
+  margin-left: 10px;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
   /* Contenido centrado */
   body {
     margin: 0;
@@ -74,12 +87,10 @@
 </head>
 <body>
   <div class="container"></div> <!-- Fondo animado -->
-  <h1>Monke!</h1>
+  <h1>Monke! <img src="assets/spooky.png" alt="Pumpkin" class="pumpkin-inline"></h1>
   <p>C++ Developer</p>
   <a href="https://discord.gg/sY22ANKA" target="_blank">
     <img src="assets/discord.png" alt="Discord Server">
   </a>
 </body>
 </html>
-
-
